@@ -16,13 +16,15 @@ Resources
 -------------------------------
 
 * [Main UI Automation Reference](https://msdn.microsoft.com/en-us/library/windows/desktop/ee684009(v=vs.85).aspx)
+* [An Introduction to UI Automation](http://blog.functionalfun.net/2009/06/introduction-to-ui-automation-with.html)
 
 #### Security
 
 * [Security Considerations for Assistive Technologies](https://msdn.microsoft.com/en-us/library/windows/desktop/ee671610.aspx)
 * [Code Signing for Developers - An Authenticode How-To](http://www.tech-pro.net/code-signing-for-developers.html)
+* [Code Signing With Self-Signed Cert](http://stackoverflow.com/questions/84847/how-do-i-create-a-self-signed-certificate-for-code-signing-on-windows)
 * [Ease of Access – Assistive Technology Registration](https://msdn.microsoft.com/en-us/library/windows/desktop/bb879984.aspx)
-* [Free Code Signing for OSS Projects](https://www.certum.eu/certum/cert,offer_en_open_source_cs.xml)
+* [Code Signing Cert for OSS Projects (14 EUR / yr)](https://www.certum.eu/certum/cert,offer_en_open_source_cs.xml)
 
 #### Grids Over Popups and Menus
 
