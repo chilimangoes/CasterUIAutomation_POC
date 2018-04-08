@@ -59,17 +59,31 @@ namespace CasterUIAutomation.Actions
 
         public void Execute()
         {
-            if (!initialized)
-                throw new InvalidOperationException("Must initialize action before executing.");
+            AssertInitialized();
 
             var events = ParseSpec();
-            //keyboard.Send
+            GetKeyboard().SendKeyboardEvents(events);
+        }
 
-            throw new NotImplementedException();
+        private Keyboard GetKeyboard()
+        {
+            if (keyboard == null)
+            {
+                keyboard = Keyboard.GetActiveKeyboard();
+            }
+            return keyboard;
+        }
+
+        private void AssertInitialized()
+        {
+            if (!initialized)
+                throw new InvalidOperationException("This object must be initialized before it can be used.");
         }
 
         public IEnumerable<KeyboardEvent> ParseSpec()
         {
+            AssertInitialized();
+
             List<KeyboardEvent> events = new List<KeyboardEvent>();
             foreach (string singleSpec in Spec.Split(KEY_SEPARATOR))
             {
@@ -256,11 +270,7 @@ namespace CasterUIAutomation.Actions
         {
             if (dynamicKeyboardMappings.ContainsKey(keyname))
             {
-                if (keyboard == null)
-                {
-                    keyboard = Keyboard.GetActiveKeyboard();
-                }
-                return keyboard.GetTypeable(dynamicKeyboardMappings[keyname]);
+                return GetKeyboard().GetTypeable(dynamicKeyboardMappings[keyname]);
             }
 
             if (staticKeyboardMappings.ContainsKey(keyname))

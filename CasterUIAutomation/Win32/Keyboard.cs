@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using WindowsInput;
 using WindowsInput.Native;
 
 // Loosely based off of code in Dragonfly, to make porting the Dragonfly Key action class easier
@@ -49,6 +50,21 @@ namespace CasterUIAutomation.Win32
         private Keyboard(IntPtr keyboardLayout)
         {
             this.keyboardLayout = keyboardLayout;
+        }
+
+        public void SendKeyboardEvents(IEnumerable<KeyboardEvent> events)
+        {
+            var keyboard = new InputSimulator().Keyboard;
+            foreach (var e in events)
+            {
+                if (e.KeyDown)
+                    keyboard.KeyDown(e.KeyCode);
+                else
+                    keyboard.KeyUp(e.KeyCode);
+
+                if (e.Timeout > 0)
+                    keyboard.Sleep((int)(e.Timeout * 1000));
+            }
         }
 
         public Typeable GetTypeable(char character)
@@ -119,6 +135,10 @@ namespace CasterUIAutomation.Win32
     {
         public VirtualKeyCode KeyCode { get; set; }
         public bool KeyDown { get; set; }
+        /// <summary>
+        /// Amount of time, in seconds, to wait after processing this event 
+        /// before contiuing to process further keyboard events.
+        /// </summary>
         public float Timeout { get; set; }
     }
 }
