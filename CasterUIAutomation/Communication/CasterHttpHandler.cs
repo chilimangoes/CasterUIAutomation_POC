@@ -36,9 +36,10 @@ namespace CasterUIAutomation.Communication
                     Debug.WriteLine("Handling 'Key' command:");
                     Debug.WriteLine("Query String: " + queryString);
                     Debug.WriteLine("Body: " + body);
-                    var action = new KeyAction(parameters);
+                    IAction action = new KeyAction();
+                    action.Initialize(parameters);
                     //actionQueue.Enqueue(action);
-                    action.ParseSpec();
+                    action.Execute();
                     break;
                 default:
                     string message = "Unrecognized commnand in URL: " + path;

@@ -87,7 +87,8 @@ namespace CasterUIAutomation.Tests
         {
             var expected = expectedEvents.ToArray();
 
-            KeyAction action = new KeyAction(spec);
+            KeyAction action = new KeyAction();
+            action.Initialize(spec);
             var actual = action.ParseSpec().ToArray();
 
             Assert.AreEqual(expected.Count(), actual.Count(), "Event count mismatch for spec: " + spec);

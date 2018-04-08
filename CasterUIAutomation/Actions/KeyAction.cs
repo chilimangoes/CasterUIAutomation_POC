@@ -8,8 +8,9 @@ using WindowsInput.Native;
 
 namespace CasterUIAutomation.Actions
 {
-    public class KeyAction
+    public class KeyAction : IAction
     {
+        bool initialized = false;
         Keyboard keyboard;
 
         const char KEY_SEPARATOR = ',';
@@ -25,21 +26,47 @@ namespace CasterUIAutomation.Actions
         const float INTERVAL_FACTOR = 0.01F;
         const float INTERVAL_DEFAULT = 0.0F;
 
-        public KeyAction(Dictionary<string, string> parameters)
+        //public KeyAction(Dictionary<string, string> parameters)
+        //{
+        //    if (parameters == null)
+        //        throw new ArgumentNullException("parameters");
+        //    if (!parameters.ContainsKey("spec"))
+        //        throw new ArgumentOutOfRangeException("parameters", "Expected parameter 'spec' not found in parameter list.");
+
+        //    Spec = parameters["spec"];
+        //}
+        //public KeyAction(string spec)
+        //{
+        //    Spec = spec;
+        //}
+
+        public string Spec { get; private set; }
+
+        public void Initialize(Dictionary<string, string> parameters)
         {
             if (parameters == null)
                 throw new ArgumentNullException("parameters");
             if (!parameters.ContainsKey("spec"))
                 throw new ArgumentOutOfRangeException("parameters", "Expected parameter 'spec' not found in parameter list.");
 
-            Spec = parameters["spec"];
+            Initialize(parameters["spec"]);
         }
-        public KeyAction(string spec)
+        public void Initialize(string spec)
         {
             Spec = spec;
+            initialized = true;
         }
 
-        public string Spec { get; private set; }
+        public void Execute()
+        {
+            if (!initialized)
+                throw new InvalidOperationException("Must initialize action before executing.");
+
+            var events = ParseSpec();
+            //keyboard.Send
+
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<KeyboardEvent> ParseSpec()
         {
