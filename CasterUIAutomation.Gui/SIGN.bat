@@ -5,7 +5,7 @@ set PFX_FILE=CasterSPC.pfx
 set APP_FILE=CasterUIAutomation.exe
 
 :: Check to see if code signing tools are available...
-for /f %%i in ('makecert') do set OUTPUT=%%i
+for /f %%i in ('signtool') do set OUTPUT=%%i
 if "%OUTPUT%"=="" (
   echo.
   echo.

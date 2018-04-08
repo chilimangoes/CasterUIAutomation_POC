@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CasterUIAutomation")]
+[assembly: AssemblyTitle("CasterAutomationService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("CasterUIAutomation")]
+[assembly: AssemblyProduct("CasterAutomationService")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("272ae362-3440-4bde-ad86-b401f7eea36a")]
+[assembly: Guid("0a45410e-66ad-4a2a-8c50-acc4e21732ef")]
 
 // Version information for an assembly consists of the following four values:
 //

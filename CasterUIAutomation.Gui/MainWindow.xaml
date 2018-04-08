@@ -1,0 +1,17 @@
+﻿<Window x:Class="CasterUIAutomation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="367" Width="640" Closing="Window_Closing">
+    <Grid>
+        <Label Content="Path / hWnd" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtHandle" HorizontalAlignment="Left" Height="23" Margin="91,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="336"/>
+        <Button x:Name="btnAttach" Content="Attach" HorizontalAlignment="Left" Margin="432,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnAttach_Click"/>
+        <TextBlock x:Name="txtOutput" Margin="10,95,10,10" TextWrapping="Wrap" Text="TextBlock" Background="#FFF7F7F7"/>
+        <Button x:Name="btnTestNotepad" Content="Test Notepad" HorizontalAlignment="Left" Margin="114,57,0,0" VerticalAlignment="Top" Width="99" Click="btnTestNotepad_Click"/>
+        <Button x:Name="btnCapture" Content="Capture" HorizontalAlignment="Left" Margin="512,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="btnCapture_Click"/>
+        <Button x:Name="btnStopTimer" Content="Stop Timer" HorizontalAlignment="Left" Margin="11,57,0,0" VerticalAlignment="Top" Width="98" Click="btnStopTimer_Click"/>
+        <Button x:Name="btnFindWinLogon" Content="Find WinLogon" HorizontalAlignment="Left" Margin="218,57,0,0" VerticalAlignment="Top" Width="99" Click="btnFindWinLogon_Click"/>
+        <Button x:Name="btnEnumDesktop" Content="Enum Desktop" HorizontalAlignment="Left" Margin="322,57,0,0" VerticalAlignment="Top" Width="99" Click="btnEnumDesktop_Click"/>
+
+    </Grid>
+</Window>

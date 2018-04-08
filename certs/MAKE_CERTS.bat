@@ -73,7 +73,7 @@ echo Adding public CA certificate to trusted root store...
 echo.
 pause
 certutil -user -addstore Root "%CERT_NAME%CA.cer"
-:: NOTE: to verify this step, run 'certmgr.exe' and check 
+:: NOTE: to verify this step, run 'certmgr' and check 
 ::       the Trusted Root Certification Authorities tab for 
 ::       a cert named '%CERT_NAME% CA'.
 echo.

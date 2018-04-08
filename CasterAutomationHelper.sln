@@ -1,9 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterUIAutomation", "CasterUIAutomation\CasterUIAutomation.csproj", "{EC76BCE6-7126-4D77-AEDA-C19720594868}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterAutomationService", "CasterAutomationService\CasterAutomationService.csproj", "{0A45410E-66AD-4A2A-8C50-ACC4E21732EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterUIAutomation.Win32", "CasterUIAutomation.Win32\CasterUIAutomation.Win32.csproj", "{A284F7E2-B2E1-40C3-934A-7D2CEFFFAB68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterUIAutomation.Gui", "CasterUIAutomation.Gui\CasterUIAutomation.Gui.csproj", "{F20363FA-4FCD-4270-AEB2-E556F71FFB55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterUIAutomation", "CasterUIAutomation\CasterUIAutomation.csproj", "{272AE362-3440-4BDE-AD86-B401F7EEA36A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsInput", "WindowsInput\WindowsInput.csproj", "{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasterUIAutomation.Tests", "CasterUIAutomation.Tests\CasterUIAutomation.Tests.csproj", "{4A86F7F4-2BA1-4FEF-8B94-D1B6EB90BF9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +21,35 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EC76BCE6-7126-4D77-AEDA-C19720594868}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC76BCE6-7126-4D77-AEDA-C19720594868}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC76BCE6-7126-4D77-AEDA-C19720594868}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC76BCE6-7126-4D77-AEDA-C19720594868}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A45410E-66AD-4A2A-8C50-ACC4E21732EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A45410E-66AD-4A2A-8C50-ACC4E21732EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A45410E-66AD-4A2A-8C50-ACC4E21732EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A45410E-66AD-4A2A-8C50-ACC4E21732EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A284F7E2-B2E1-40C3-934A-7D2CEFFFAB68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A284F7E2-B2E1-40C3-934A-7D2CEFFFAB68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A284F7E2-B2E1-40C3-934A-7D2CEFFFAB68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A284F7E2-B2E1-40C3-934A-7D2CEFFFAB68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F20363FA-4FCD-4270-AEB2-E556F71FFB55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F20363FA-4FCD-4270-AEB2-E556F71FFB55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F20363FA-4FCD-4270-AEB2-E556F71FFB55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F20363FA-4FCD-4270-AEB2-E556F71FFB55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{272AE362-3440-4BDE-AD86-B401F7EEA36A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{272AE362-3440-4BDE-AD86-B401F7EEA36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{272AE362-3440-4BDE-AD86-B401F7EEA36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{272AE362-3440-4BDE-AD86-B401F7EEA36A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3549CD6F-80F8-450F-B99E-CF0A736B1F2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A86F7F4-2BA1-4FEF-8B94-D1B6EB90BF9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A86F7F4-2BA1-4FEF-8B94-D1B6EB90BF9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A86F7F4-2BA1-4FEF-8B94-D1B6EB90BF9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A86F7F4-2BA1-4FEF-8B94-D1B6EB90BF9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {49715478-D49B-44D2-A9EB-CFEDF3D09178}
 	EndGlobalSection
 EndGlobal
