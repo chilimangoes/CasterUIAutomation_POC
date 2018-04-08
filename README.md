@@ -8,7 +8,7 @@ Getting Started
 -------------------------------
 
 * Install the [Windows SDK](http://go.microsoft.com/fwlink/p/?LinkID=271979).
-* Install Visual Studio if you don't already have it. You can download Visual Studio Community edition for free [here](https://www.visualstudio.com/en-us/downloads/download-visual-studio-vs.aspx).
+* Install Visual Studio if you don't already have it. You can download Visual Studio Community edition for free [here](https://www.visualstudio.com/vs/community/).
 * Open the `CasterUIAutomation.sln' file. This is a skeleton project that we can use for prototyping.
 
 
@@ -27,7 +27,7 @@ Before code signing the application, you first need to generate self-signed code
 
 3) Follow the prompts to generate certificate files for code signing.
 
-IMPORTANT: At the end of the certificate version process, a warning like the following will be displayed. *Please* take this warning seriously and protect your private key and the password(s) used to protect it and your PFX file.
+IMPORTANT: At the end of the certificate installation process, a warning like the following will be displayed. *Please* take this warning seriously and protect your private key and the password(s) used to protect it and your PFX file.
 
 ```
 ===============================================================
@@ -111,6 +111,18 @@ Resources
 * [Ease of Access – Assistive Technology Registration](https://msdn.microsoft.com/en-us/library/windows/desktop/bb879984.aspx)
 * [Code Signing Cert for OSS Projects (14 EUR / yr)](https://www.certum.eu/certum/cert,offer_en_open_source_cs.xml)
 
+#### Interacting With UAC Prompts
+
+* [Using the uiAccess attribute of requestedExecutionLevel to Improve Applications Providing Remote Control of the Desktop](https://blogs.msdn.microsoft.com/cjacks/2009/10/15/using-the-uiaccess-attribute-of-requestedexecutionlevel-to-improve-applications-providing-remote-control-of-the-desktop/)
+
+###### Method 1: Run as SYSTEM service
+* [How do I run my application while a UAC dialog window is showing?](https://stackoverflow.com/questions/2821667/how-do-i-run-my-application-while-a-uac-dialog-window-is-showing/2822292#2822292)
+* [User Account Control Prompts on the Secure Desktop](https://web.archive.org/web/20160717050724/https://blogs.msdn.microsoft.com/uac/2006/05/03/user-account-control-prompts-on-the-secure-desktop/)
+
+###### Method 2: Disable UAC from appearing on Secure Desktop (NOT ideal)
+* [UAC Automation](https://social.msdn.microsoft.com/Forums/windowsdesktop/en-US/674b4951-1c6e-400a-838e-dc72c672a12c/uac-automation-success?forum=windowssecurity)
+
+
 #### Grids Over Popups and Menus
 
 * [Stack Overflow: Windows 8 Layered Windows Over Metro Apps](https://stackoverflow.com/questions/11232450/windows-8-layered-windows-over-metro-apps/13497452#13497452)
@@ -125,3 +137,9 @@ Might be useful later on for more advanced scenarios.
 * [Working with Text Ranges](https://msdn.microsoft.com/en-us/library/windows/desktop/hh298427(v=vs.85).aspx)
 
 
+# one
+## two
+### three
+#### four
+##### five
+###### six
