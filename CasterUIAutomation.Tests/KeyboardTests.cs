@@ -13,7 +13,7 @@ namespace CasterUIAutomation.Tests
     public class KeyboardTests
     {
         [TestMethod]
-        public void TestKeyCodeConversion()
+        public void Keyboard_KeyCodeConversion()
         {
             TestKeyCodeConversion('A', new Typeable(VirtualKeyCode.VK_A, new VirtualKeyCode[] { VirtualKeyCode.SHIFT }));
             TestKeyCodeConversion('z', new Typeable(VirtualKeyCode.VK_Z));
@@ -31,10 +31,13 @@ namespace CasterUIAutomation.Tests
             TestKeyCodeConversion('|', new Typeable(VirtualKeyCode.OEM_5, new VirtualKeyCode[] { VirtualKeyCode.SHIFT }));
             TestKeyCodeConversion('\'', new Typeable(VirtualKeyCode.OEM_7));
             TestKeyCodeConversion('"', new Typeable(VirtualKeyCode.OEM_7, new VirtualKeyCode[] { VirtualKeyCode.SHIFT }));
+
+            var k = new Typeable(VirtualKeyCode.VK_T, new VirtualKeyCode[] { VirtualKeyCode.SHIFT, VirtualKeyCode.CONTROL });
+            Assert.IsNotNull(k);
         }
 
         [TestMethod]
-        public void TestInternationalKeyCodeConversion()
+        public void Keyboard_InternationalKeyCodeConversion()
         {
             throw new NotImplementedException();
         }

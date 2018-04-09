@@ -11,7 +11,7 @@ namespace CasterUIAutomation.Tests
     public class HttpUtilityTests
     {
         [TestMethod]
-        public void TestQueryStringParsing()
+        public void HttpUtility_TestQueryStringParsing()
         {
             var parametersIn = new Dictionary<string, string>()
                 {

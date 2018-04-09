@@ -23,7 +23,7 @@ namespace CasterUIAutomation.Actions
             { 's', "shift" },
             { 'w', "win" },
         };
-        const float INTERVAL_FACTOR = 0.01F;
+        const float INTERVAL_FACTOR = 0.01F; // pauses for key action are defined in hundredths of seconds
         const float INTERVAL_DEFAULT = 0.0F;
 
         //public KeyAction(Dictionary<string, string> parameters)
@@ -87,7 +87,14 @@ namespace CasterUIAutomation.Actions
             List<KeyboardEvent> events = new List<KeyboardEvent>();
             foreach (string singleSpec in Spec.Split(KEY_SEPARATOR))
             {
-                events.AddRange(ParseSingle(singleSpec));
+                try
+                {
+                    events.AddRange(ParseSingle(singleSpec));
+                }
+                catch (Exception ex)
+                {
+                    throw new FormatException("Error parsing term '" + singleSpec + "' in spec: " + Spec, ex);
+                }
             }
             return events;
         }
@@ -144,7 +151,7 @@ namespace CasterUIAutomation.Actions
 
             // find out what delimiter sequence is used... e.g. "/:", "/:/", ":/", etc... 
             var delimiters = spec.Substring(index)
-                .Select((c, i) => new { c, i })
+                .Select((c, i) => new { c, i = i + index})
                 .Where(el => DELIMITER_CHARACTERS.Contains(el.c));
             string delimiter_sequence = string.Join("", delimiters.Select(d => d.c));
             var delimiter_index = delimiters.Select(d => d.i).ToArray();

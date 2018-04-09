@@ -125,9 +125,28 @@ namespace CasterUIAutomation.Win32
         }
         public IEnumerable<KeyboardEvent> GetEvents(float timeout = 0.01F)
         {
-            var events = GetOnEvents().ToList();
-            events.AddRange(GetOffEvents());
+            var events = Modifiers.Select(k => new KeyboardEvent { KeyCode = k, KeyDown = true, Timeout = 0 })
+                .ToList();
+            events.Add(new KeyboardEvent { KeyCode = this.Key, KeyDown = true, Timeout = 0 });
+            events.Add(new KeyboardEvent { KeyCode = this.Key, KeyDown = false, Timeout = timeout });
+            events.AddRange(Modifiers.Select(k => new KeyboardEvent { KeyCode = k, KeyDown = false, Timeout = 0 }));
+
+            //var events = GetOnEvents().ToList();
+            //events.AddRange(GetOffEvents(timeout));
             return events;
+        }
+
+        public override string ToString()
+        {
+            if (Modifiers != null && Modifiers.Length > 0)
+            {
+                string modifiers = string.Join(" + ", Modifiers);
+                return string.Format("{0}: {1} + {2})", base.ToString(), modifiers, Key);
+            }
+            else
+            {
+                return string.Format("{0}: {1}", base.ToString(), Key);
+            }
         }
     }
 
@@ -140,5 +159,10 @@ namespace CasterUIAutomation.Win32
         /// before contiuing to process further keyboard events.
         /// </summary>
         public float Timeout { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1} {2} {3}", base.ToString(), KeyCode, KeyDown ? "DOWN" : "UP", Timeout);
+        }
     }
 }

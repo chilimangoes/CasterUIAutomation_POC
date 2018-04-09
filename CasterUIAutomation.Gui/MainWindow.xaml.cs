@@ -217,8 +217,14 @@ namespace CasterUIAutomation
 
             using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
             {
+                // Normal press-release key action, optionally repeated several times:
+                //     [modifiers -] keyname [/ innerpause] [: repeat] [/ outerpause]
+                // Press-and-hold a key, or release a held-down key:
+                //     [modifiers -] keyname : direction [/ outerpause]
+
                 var values = new Dictionary<string, string>()
                 {
+                    { "spec", "t,e,s, t, s-left/0.5:4/1, c-c/2, c-v/1, c-v" },
                     { "prop1", "hello" },
                     { "prop2", "world" }
                 };

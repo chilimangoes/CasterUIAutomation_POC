@@ -24,35 +24,57 @@ namespace CasterUIAutomation.Tests
         VirtualKeyCode[] controlShift = new VirtualKeyCode[] { VirtualKeyCode.CONTROL, VirtualKeyCode.SHIFT };
 
         [TestMethod]
-        public void TestParsingSimple()
+        public void KeyAction_Simple()
         {
             TestParsing("d", null, VirtualKeyCode.VK_D);
             TestParsing("c-s", control, VirtualKeyCode.VK_S);
             TestParsing("s-f1", shift, VirtualKeyCode.F1);
             TestParsing("a-3", alt, VirtualKeyCode.VK_3);
             TestParsing("cs-z", controlShift, VirtualKeyCode.VK_Z);
+            TestParsing("left", null, VirtualKeyCode.LEFT);
+            TestParsing("s-left", shift, VirtualKeyCode.LEFT);
         }
 
         [TestMethod]
-        public void TestParsingSymbols()
+        public void KeyAction_Complex()
         {
-            throw new NotImplementedException();
+            string spec = "t, s-left/50:2/100";
+            KeyboardEvent[] expected = new KeyboardEvent[]
+            {
+                new KeyboardEvent { KeyCode=VirtualKeyCode.VK_T, KeyDown=true, Timeout=0F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.VK_T, KeyDown=false, Timeout=0F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.SHIFT, KeyDown=true, Timeout=0.01F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.LEFT, KeyDown=true, Timeout=0F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.LEFT, KeyDown=false, Timeout=0.5F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.LEFT, KeyDown=true, Timeout=0F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.LEFT, KeyDown=false, Timeout=1F },
+                new KeyboardEvent { KeyCode=VirtualKeyCode.SHIFT, KeyDown=false, Timeout=0.01F },
+            };
+
+            TestParsing(spec, expected, false);
         }
 
         [TestMethod]
-        public void TestParsingPressAndHold()
+        public void KeyAction_PressAndHold()
         {
-            throw new NotImplementedException();
+            string spec = "shift:down/75";
+            KeyboardEvent[] expected = new KeyboardEvent[]
+            {
+                new KeyboardEvent { KeyCode=VirtualKeyCode.SHIFT, KeyDown=true, Timeout=0.75F },
+            };
+            TestParsing(spec, expected, false);
+
+            spec = "alt:up";
+            expected = new KeyboardEvent[]
+            {
+                new KeyboardEvent { KeyCode=VirtualKeyCode.MENU, KeyDown=false, Timeout=0F },
+            };
+            TestParsing(spec, expected, false);
+
         }
 
         [TestMethod]
-        public void TestParsingTimings()
-        {
-            throw new NotImplementedException();
-        }
-
-        [TestMethod]
-        public void TestParsingInternationalKeyboardLayouts()
+        public void KeyAction_InternationalKeyboardLayouts()
         {
             throw new NotImplementedException();
         }
