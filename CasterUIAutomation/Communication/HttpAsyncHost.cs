@@ -150,6 +150,7 @@ namespace CasterUIAutomation.Communication
             _stop = true;
             _listener.Stop();
             _listener.Close();
+            _handler.Dispose();
             //_listener = null;
         }
         

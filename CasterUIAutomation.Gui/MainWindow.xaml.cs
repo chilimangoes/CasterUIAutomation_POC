@@ -224,7 +224,7 @@ namespace CasterUIAutomation
 
                 var values = new Dictionary<string, string>()
                 {
-                    { "spec", "t,e,s, t, s-left/0.5:4/1, c-c/2, c-v/1, c-v" },
+                    { "spec", "t,e,s, t, s-left/50:4/100, c-c/50, c-v/100, c-v" },
                     { "prop1", "hello" },
                     { "prop2", "world" }
                 };

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CasterUIAutomation.Communication
 {
-    public interface IHttpAsyncHandler
+    public interface IHttpAsyncHandler : IDisposable
     {
         /// <summary>
         /// Main execution method of the handler which returns an HTTP response intent.
