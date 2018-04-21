@@ -16,7 +16,7 @@ namespace CasterAutomationService
 {
     public partial class UIAutomationService : ServiceBase
     {
-        EventLog log;
+        EventLogWrapper log;
         System.Timers.Timer timer = new System.Timers.Timer();
         Win32.NativeTypes.PROCESS_INFORMATION processInfo = new Win32.NativeTypes.PROCESS_INFORMATION();
 
@@ -24,16 +24,7 @@ namespace CasterAutomationService
         {
             InitializeComponent();
 
-            log = new EventLog();
-            //EventLog.Delete("CasterUIAutomation");
-            //EventLog.DeleteEventSource("CasterUIAutomation");
-            //EventLog.CreateEventSource("CasterUIAutomation", "CasterUIAutomation");
-            if (!EventLog.SourceExists("CasterUIAutomationLogSource"))
-            {
-                EventLog.CreateEventSource("CasterUIAutomationLogSource", "CasterUIAutomationLog");
-            }
-            log.Source = "CasterUIAutomationLogSource";
-            log.Log = "CasterUIAutomationLog";
+            log = new EventLogWrapper("CasterUIAutomationLogSource", "CasterUIAutomationLog");
 
             timer.Interval = 10000; // 10 seconds  
             timer.Elapsed += timer_Elapsed; ;
@@ -70,7 +61,7 @@ namespace CasterAutomationService
             }
             catch (Exception ex)
             {
-                log.WriteEntry(ex.ToString());
+                log.WriteEntry(ex.ToString(), EventLogEntryType.Error);
             }
         }
         
@@ -83,22 +74,26 @@ namespace CasterAutomationService
                 if (processes.Count() == 0)
                     throw new ApplicationException("Couldn't find winlogon process! Aborting.");
                 if (processes.Count() > 1)
-                    log.WriteEntry("More than one winlogon process found! The first one will be used.");
+                    log.WriteEntry("More than one winlogon process found! The first one will be used.", EventLogEntryType.Warning);
 
                 var process = processes.First();
-
                 //appendLog("----------------------------------------");
                 //appendLog("Process Handle: " + process.Handle);
                 //appendLog("Session ID: " + process.SessionId);
                 //appendLog("PID: " + process.Id);
                 //appendLog("Process Name: " + process.ProcessName);
                 //appendLog("----------------------------------------");
-                string path = "\"" + Process.GetCurrentProcess().MainModule.FileName + "\" client";
+
+                string path = "\"" + System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName) + "\\CasterUIAutomation.SystemTray.exe\"";
+                //path = "\"" + Process.GetCurrentProcess().MainModule.FileName + "\" client";
                 //path = @"C:\Program Files (x86)\Winspector\WinspectorU.exe";
 
                 // The exceptions to this are services that need to interact with the console user, so these load into Winsta0 instead.
                 // https://blogs.technet.microsoft.com/askperf/2007/07/24/sessions-desktops-and-windows-stations/
 
+                
+                // TODO: this fails when logged in via RDP, possibly due to multiple winlogon processes being present
+                log.WriteEntry("Launching: " + path);
                 processInfo = Win32.Process.Launch(path, "client", process.Handle, @"WinSta0\Winlogon");
             }
             catch (Exception ex)

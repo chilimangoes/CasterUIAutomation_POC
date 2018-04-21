@@ -11,6 +11,15 @@ namespace CasterUIAutomation.Communication
 
     // Adapted from https://github.com/JamesDunne/aardwolf
 
+    public enum HttpAsyncHostStatus
+    {
+        Uninitialised,
+        Initialised,
+        Starting,
+        Running,
+        //Error,
+    }
+
     public sealed class HttpAsyncHost
     {
         bool _stop = false;
@@ -30,40 +39,36 @@ namespace CasterUIAutomation.Communication
         /// Lower values mean less connections can be maintained yet at a much faster average response time; more connections will be rejected.
         /// </param>
         public HttpAsyncHost(IHttpAsyncHandler handler, int accepts = 1)
-        //public HttpAsyncHost(int accepts = 4)
         {
+            SetStatus(HttpAsyncHostStatus.Uninitialised);
+
             _handler = handler ?? throw new ArgumentNullException("handler");
-            
-            // NOTE: *** WE SHOULD NOT HAVE MORE THAN 1 THREAD FOR CASTER BECAUSE UI INPUT NEEDS TO BE SYNCRONOUS ***
             _accepts = accepts;
+
+            SetStatus(HttpAsyncHostStatus.Initialised);
         }
 
-        //class HostContext : IHttpAsyncHostHandlerContext
-        //{
-        //    public IHttpAsyncHost Host { get; private set; }
-        //    public IHttpAsyncHandler Handler { get; private set; }
 
-        //    public HostContext(IHttpAsyncHost host, IHttpAsyncHandler handler)
-        //    {
-        //        Host = host;
-        //        Handler = handler;
-        //    }
-        //}
+        public delegate void StatusChangeEvent(HttpAsyncHostStatus oldStatus, HttpAsyncHostStatus newStatus);
+        public event StatusChangeEvent StatusChanged;
 
-        //public List<string> Prefixes
-        //{
-        //    get { return _listener.Prefixes.ToList(); }
-        //}
+        public HttpAsyncHostStatus Status { get; private set; }
 
-        //public void SetConfiguration(ConfigurationDictionary values)
-        //{
-        //    _configValues = values;
-        //}
+        private void SetStatus(HttpAsyncHostStatus newStatus)
+        {
+            HttpAsyncHostStatus oldStatus = Status;
+            Status = newStatus;
+            StatusChanged?.Invoke(oldStatus, newStatus);
+        }
 
         public Task StartAsync(string hostName, int listenPort)
         {
+            if (Status == HttpAsyncHostStatus.Uninitialised)
+                throw new InvalidOperationException("Host is in an invalid state. Initialization may have failed.");
             if (_listener != null)
                 throw new InvalidOperationException("Host has already been started.");
+
+            SetStatus(HttpAsyncHostStatus.Starting);
 
             // Establish a host-handler context:
             //_hostContext = new HostContext(this, _handler);
@@ -115,12 +120,14 @@ namespace CasterUIAutomation.Communication
                 // Lower values mean less connections can be maintained yet at a much faster average response time; more connections will be rejected.
                 var semaphore = new Semaphore(_accepts, _accepts);
 
+                SetStatus(HttpAsyncHostStatus.Running);
+
                 while (!_stop)
                 {
                     semaphore.WaitOne();
                     
 #pragma warning disable 4014
-                    _listener.GetContextAsync().ContinueWith(async (t) =>
+                    _listener?.GetContextAsync().ContinueWith(async (t) =>
                     {
                         string errMessage;
 
@@ -141,6 +148,8 @@ namespace CasterUIAutomation.Communication
                     });
 #pragma warning restore 4014
                 }
+
+                SetStatus(HttpAsyncHostStatus.Initialised);
             });
         }
 
@@ -148,10 +157,11 @@ namespace CasterUIAutomation.Communication
         {
             // TODO: thread safety
             _stop = true;
-            _listener.Stop();
-            _listener.Close();
-            _handler.Dispose();
-            //_listener = null;
+            _listener?.Stop();
+            _listener?.Close();
+            _handler?.Dispose();
+            _listener = null;
+            SetStatus(HttpAsyncHostStatus.Initialised);
         }
         
         static async Task ProcessListenerContext(HttpListenerContext listenerContext, HttpAsyncHost host)

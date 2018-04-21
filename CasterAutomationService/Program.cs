@@ -6,12 +6,19 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using Win32 = CasterUIAutomation.Win32;
+using CasterUIAutomation.SystemTray;
 
 namespace CasterAutomationService
 {
+
+    // https://www.codeproject.com/Articles/35773/Subverting-Vista-UAC-in-Both-and-bit-Archite
+
     static class Program
     {
         static EventLogWrapper log;
+
+        // This reference is only here so that Visual Studio will copy the system tray application to the output folder when we build the project
+        static CasterUIAutomation.SystemTray.STAApplicationContext appContext;
 
         static void Main(string[] args)
         {
