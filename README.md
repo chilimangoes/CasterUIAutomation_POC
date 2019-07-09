@@ -2,7 +2,7 @@
 CasterUIAutomation_POC
 ===============================
 
-POC project for experimentnig with using Microsoft's UI Automation API to develop a helper service to facilitate Caster interaction with system UI elements (e.g. task bar, menus, etc.) and programs running as administrator, as discussed in [this issue](https://github.com/synkarius/caster/issues/114) and in [this conversation on Gitter](https://gitter.im/synkarius/caster?at=57df75b9aabc89857fb32558). We can also use this README and the repository's issues to gather links to relevant documentation and articles, collect ideas, etc.
+POC project for experimentnig with using Microsoft's UI Automation API to develop a helper service to facilitate Caster interaction with system UI elements (e.g. task bar, menus, etc.) and programs running as administrator, as discussed in [this issue](https://github.com/dictation-toolbox/caster/issues/114) and in [this conversation on Gitter](https://gitter.im/dictation-toolbox/caster?at=57df75b9aabc89857fb32558). We can also use this README and the repository's issues to gather links to relevant documentation and articles, collect ideas, etc.
 
 Getting Started
 -------------------------------
@@ -18,6 +18,8 @@ Code signing
 If you want to test this POC app interacting with applications that are *not* running as administrator, you can do so by simply running it from within Visual Studio, e.g. by pressing F5. However, in order to interact with applications that are running as administrator, it needs to be set up as an accessibility app. Among other requirements, this means that it needs to be code signed and installed to the Program Files directory.
 
 ### Generating Self-Signed Certificates
+
+***NOTE: THE PROCEDURE BELOW DOES NOT WORK ON WINDOWS 10. See [this page](https://gist.github.com/caspark/29a38ebb47cc7b2315c33f71c01ec237) for a different method of generating code signing certs on Win10. I'm leaving it here because some of the information might be useful.***
 
 Before code signing the application, you first need to generate self-signed code signing certificates and a PFX file. To do this:
 
